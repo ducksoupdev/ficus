@@ -1,0 +1,516 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FicusJS documentation - Stores</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/darcula.css">
+  <link rel="stylesheet" href="css/scribbler-global.css">
+  <link rel="stylesheet" href="css/scribbler-doc.css">
+  <link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="img/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="img/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="img/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="img/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<svg style="position:absolute;height:0;width:0;">
+  <symbol id="icon_home" viewBox="0 0 32 32">
+    <g>
+      <path d="M 16 2.59375 L 15.28125 3.28125 L 2.28125 16.28125 L 3.71875 17.71875 L 5 16.4375 L 5 28 L 14 28 L 14 18 L 18 18 L 18 28 L 27 28 L 27 16.4375 L 28.28125 17.71875 L 29.71875 16.28125 L 16.71875 3.28125 Z M 16 5.4375 L 25 14.4375 L 25 26 L 20 26 L 20 16 L 12 16 L 12 26 L 7 26 L 7 14.4375 Z "></path>
+    </g>
+  </symbol>
+  <symbol id="icon_github" viewBox="0 0 32 32">
+    <g>
+      <path d="M 16 4 C 9.371094 4 4 9.371094 4 16 C 4 21.300781 7.4375 25.800781 12.207031 27.386719 C 12.808594 27.496094 13.027344 27.128906 13.027344 26.808594 C 13.027344 26.523438 13.015625 25.769531 13.011719 24.769531 C 9.671875 25.492188 8.96875 23.160156 8.96875 23.160156 C 8.421875 21.773438 7.636719 21.402344 7.636719 21.402344 C 6.546875 20.660156 7.71875 20.675781 7.71875 20.675781 C 8.921875 20.761719 9.554688 21.910156 9.554688 21.910156 C 10.625 23.746094 12.363281 23.214844 13.046875 22.910156 C 13.15625 22.132813 13.46875 21.605469 13.808594 21.304688 C 11.144531 21.003906 8.34375 19.972656 8.34375 15.375 C 8.34375 14.0625 8.8125 12.992188 9.578125 12.152344 C 9.457031 11.851563 9.042969 10.628906 9.695313 8.976563 C 9.695313 8.976563 10.703125 8.65625 12.996094 10.207031 C 13.953125 9.941406 14.980469 9.808594 16 9.804688 C 17.019531 9.808594 18.046875 9.941406 19.003906 10.207031 C 21.296875 8.65625 22.300781 8.976563 22.300781 8.976563 C 22.957031 10.628906 22.546875 11.851563 22.421875 12.152344 C 23.191406 12.992188 23.652344 14.0625 23.652344 15.375 C 23.652344 19.984375 20.847656 20.996094 18.175781 21.296875 C 18.605469 21.664063 18.988281 22.398438 18.988281 23.515625 C 18.988281 25.121094 18.976563 26.414063 18.976563 26.808594 C 18.976563 27.128906 19.191406 27.503906 19.800781 27.386719 C 24.566406 25.796875 28 21.300781 28 16 C 28 9.371094 22.628906 4 16 4 Z "></path>
+    </g>
+  </symbol>
+</svg>
+<div class="doc__bg"></div>
+<nav class="header">
+  <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
+  <ul class="menu">
+    <div class="menu__item toggle"><span></span></div>
+    <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
+    <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
+  </ul>
+</nav>
+<div class="wrapper">
+  <aside class="doc__nav">
+    <ul>
+      <li class=""><a href="docs/getting-started" class="doc__nav-item">Getting started</a></li>
+      <li class=""><a href="docs/installation" class="doc__nav-item">Installation</a></li>
+      <li class=""><a href="docs/features" class="doc__nav-item">Features</a></li>
+      <li class=""><a href="docs/components" class="doc__nav-item">Components</a></li>
+      <li class=""><a href="docs/stores" class="doc__nav-item">Stores</a></li>
+      <li class=""><a href="docs/event-bus" class="doc__nav-item">Event bus</a></li>
+      <li class=""><a href="docs/modules" class="doc__nav-item">Modules</a></li>
+      <li class=""><a href="docs/browser-support" class="doc__nav-item">Browser support</a></li>
+      <li class=""><a href="docs/going-build-less" class="doc__nav-item">Going build-less</a></li>
+      <li class=""><a href="docs/legacy-browsers" class="doc__nav-item">Legacy browsers</a></li>
+      <li class=""><a href="https://github.com/ducksoupdev/ficusjs/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
+    </ul>  </aside>
+  <article class="doc__content">
+    <h1>Stores</h1>
+<p>FicusJS provides a function for creating fast, lightweight stores for application state.</p>
+<p>To store application state outside of your components and have them react to changes, you can create a store which is shared across multiple components.</p>
+<h2>Example</h2>
+<p>Import the <code>createStore</code> function into your Javascript main file:</p>
+<p><strong>main.js</strong></p>
+<pre><code class="language-js">import { createStore } from 'https://unpkg.com/ficusjs?module'
+</code></pre>
+<p>Create a new store instance with <code>actions</code>, <code>mutations</code> and <code>initialState</code>:</p>
+<p><strong>main.js</strong></p>
+<pre><code class="language-js">const store = createStore('an.example.store', {
+  ttl: 5,
+  initialState: {
+    count: 0
+  },
+  actions: {
+    increment (context, payload) {
+      context.commit('increment', payload)
+    }
+  },
+  mutations: {
+    increment (state, payload) {
+      state.count = payload
+      return state
+    }
+  },
+  getters: {
+    max (state) {
+      return Math.max(state.count) * 1000
+    }
+  }
+})
+</code></pre>
+<h2><code>createStore</code> function</h2>
+<p>When using the <code>createStore</code> function, you <strong>must</strong> pass two parameters:</p>
+<ol>
+<li>store key (for example <code>an.example.store</code>) - keys must be unique and are used to retrieve stores later</li>
+<li>an <code>object</code> that defines the properties of the store</li>
+</ol>
+<p>The following properties can be used when creating stores:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initialState</code></td>
+<td><code>object</code></td>
+<td>The initial state of the store</td>
+</tr>
+<tr>
+<td><code>actions</code></td>
+<td><code>object</code></td>
+<td>Contains one or more action functions that are dispatched to eventually mutate state</td>
+</tr>
+<tr>
+<td><code>mutations</code></td>
+<td><code>object</code></td>
+<td>Contains one or more mutation functions that set values and return new state</td>
+</tr>
+<tr>
+<td><code>getters</code></td>
+<td><code>object</code></td>
+<td>Contains one or more getter functions that return state projections</td>
+</tr>
+<tr>
+<td><code>router</code></td>
+<td><code>object</code></td>
+<td>A router instance for use in actions where changing URL is required</td>
+</tr>
+<tr>
+<td><code>persist</code></td>
+<td><code>string</code> or <code>object</code></td>
+<td>If persistence is required (between reloads), provide a unique namespace string for saving the store to <code>window.sessionStorage</code></td>
+</tr>
+<tr>
+<td><code>ttl</code></td>
+<td><code>number</code></td>
+<td>Limit the lifetime of the data in the store by setting a time to live in seconds. Once the amount of seconds has elapsed, the store resets back to the <code>initialState</code> values</td>
+</tr>
+</tbody>
+</table>
+<h2><code>getStore</code> function</h2>
+<p>The <code>getStore</code> function is a quick way to retrieve a store.</p>
+<pre><code class="language-js">// import the function
+import { getStore } from 'https://unpkg.com/ficusjs?module'
+
+// retrieve a store instance
+const storeInstance = getStore('my.another.store')
+</code></pre>
+<h2>State</h2>
+<p>The state tree is a single object that can contain whatever data you want. It's guarded by a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"><code>Proxy</code></a>
+which keeps an eye on things for you and tells the store if something has been modified.</p>
+<h3>Reading state</h3>
+<p>You can read a value from state once the instance has been created:</p>
+<pre><code class="language-js">// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  ...
+})
+
+// Log the title of the above state example
+console.log(store.state.title)
+</code></pre>
+<h2>Actions</h2>
+<p>To modify state, you need to dispatch an <code>action</code>.</p>
+<p>Actions are quite similar to mutations, but they can contain async operations such as fetching data. The end-goal of an action is to commit one or more <code>mutations</code>.</p>
+<pre><code class="language-js">// Create a store with actions
+const store = createStore('an.example.store', {
+  actions: {
+    updateTitle (context, payload) {
+      context.commit('setTitle', payload.text)
+    }
+  }
+})
+</code></pre>
+<h3>Dispatch</h3>
+<p>The <code>dispatch</code> method is part of the store object and runs actions for you. You can dispatch wherever there's a reference to your store:</p>
+<pre><code class="language-js">// Dispatch the `updateTitle` action to update the title
+store.dispatch('updateTitle', { text: 'The new text for the title' })
+</code></pre>
+<p>The <code>dispatch</code> method takes two parameters:</p>
+<ul>
+<li><code>actionKey</code> is the string name of your action</li>
+<li><code>payload</code> is the data that you want to pass along to your action</li>
+</ul>
+<h2>Mutations</h2>
+<p>To actually modify the state, a <code>mutation</code> will take over.</p>
+<p>Mutations provide a synchronous method of mutating state. They have one job and one job only: mutate the state and return it.</p>
+<pre><code class="language-js">// Create a store with actions
+const store = createStore('an.example.store', {
+  mutations: {
+    setTitle (state, payload) {
+      state.title = payload
+      return state
+    }
+  }
+})
+</code></pre>
+<p>The <code>setTitle</code> method has two parameters:</p>
+<ul>
+<li><code>state</code> is the current version of your store's state before this mutation</li>
+<li><code>payload</code> is the data that was passed in by your action</li>
+</ul>
+<p>Mutations like this should be as simple as possible and only mutate the state. Anything more complex should be done at an action level.</p>
+<h3>Commit</h3>
+<p>The <code>commit</code> method is part of the store object and runs mutations for you.</p>
+<pre><code class="language-js">// Run the `setTitle` mutation to set the state
+context.commit('setTitle', payload)
+</code></pre>
+<p>The <code>commit</code> method takes two parameters:</p>
+<ul>
+<li><code>mutationKey</code> is the string name of your mutation</li>
+<li><code>payload</code> is the data that you want to pass along to your mutation</li>
+</ul>
+<h2>Getters</h2>
+<p>Getters are useful if you want to return a projection of the state. A projection is a shape derived from the state.</p>
+<p>They are memoized functions which means the result of the getter is cached for subsequent executions. This is useful when creating projections from large sets of data.
+Setting state will automatically reset the getter cache.</p>
+<p>For example, given an array of objects, a getter can return a filtered set of objects:</p>
+<pre><code class="language-js">// Create a store with actions
+const store = createStore('an.example.store', {
+  initialState: {
+    people: [
+      { name: 'Bill', status: 'Active' },
+      { name: 'Ted', status: 'Active' },
+      { name: 'Grim Reaper', status: 'Disabled' }
+    ]
+  },
+  getters: {
+    activePeople (state) {
+      return state.people.filter(p =&gt; p.state === 'Active')
+    }
+  }
+})
+
+const activeOnes = store.getters.activePeople
+// [{ name: 'Bill', status: 'Active' }, { name: 'Ted', status: 'Active' }]
+</code></pre>
+<h3>Passing arguments to getters</h3>
+<p>If you want to pass arguments to getters for specific filtering, you can return a function as a getter:</p>
+<pre><code class="language-js">{
+  getters: {
+    timesBy (state) {
+      return (amount) =&gt; state.count * amount
+    }
+  }
+}
+
+const total = store.getters.timesBy(20)
+// given a state.count value of 2, total will be 40
+</code></pre>
+<h2>Subscribing to store changes</h2>
+<p>If you want to be notified whenever the store state changes, you can use the <code>subscribe</code> method to register a callback function.
+This method returns a function which can be invoked later for unsubscription.</p>
+<pre><code class="language-js">// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  ...
+})
+
+// Subscribe to changes in the store
+const unsubscribe = store.subscribe(() =&gt; {
+  // this callback is invoked whenever the store changes
+  console.log('Store has changed!')
+})
+
+// Unsubscribe later
+unsubscribe()
+</code></pre>
+<h2>Clearing the store</h2>
+<p>To clear a store and reset back to the initial state, use the <code>clear()</code> method.</p>
+<pre><code class="language-js">// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  ...
+})
+
+// clear the store and reset back to the initial state
+store.clear()
+
+// you can also clear without notifying subscribers
+store.clear(false)
+</code></pre>
+<h2>Transactions</h2>
+<p>A transaction is a sequence of operations performed (using one or more actions/mutations) on a store as a single logical unit of work.
+The transaction can be either all committed (applied to the store) or all rolled back (undone from the store).</p>
+<pre><code class="language-js">// Begin a transaction
+store.begin()
+
+try {
+  // Dispatch the `updateTitle` action to update the title
+  store.dispatch('updateTitle', { text: 'The new text for the title' })
+
+  // Commit a text change
+  store.commit('setText', 'example')
+
+  // Apply the transaction to the store and notify subscribers to re-render
+  store.end()
+} catch (e) {
+  // Rollback the transaction changes
+  store.rollback()
+}
+</code></pre>
+<h2>Creating components with application state</h2>
+<p>Once you have created your store instance, simply pass it to each component so that it can react to state changes.
+Subscription to store changes will be handled automatically within the component.</p>
+<pre><code class="language-js">// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  ...
+})
+
+// A new component
+createComponent('my-component', {
+  store,
+  ...
+})
+</code></pre>
+<h2>Multiple stores</h2>
+<p>You can create as many stores as you want to separate your application state.</p>
+<h3>Manage multiple store instances with an <code>Object</code></h3>
+<p>Simply create a Javascript <code>Object</code> containing multiple store instances and then pass specific instances to your components.</p>
+<p>You can also pass this object to a component and have it reacting to all store instances.</p>
+<pre><code class="language-js">// Create a number of stores
+const allStores = {
+  food: createStore('my.food.store', { ... }),
+  drinks: createStore('my.drinks.store', { ... }),
+  snacks: createStore('my.snacks.store', { ... })
+}
+
+// Pass a relevant store to a component
+createComponent('my-component', {
+  store: allStores.drinks,
+  ...
+})
+
+// Or pass all the stores to a component
+createComponent('my-component', {
+  store: allStores,
+  ...
+})
+
+// Or just pass the required stores to a component
+createComponent('my-component', {
+  store: {
+    food: allStores.food,
+    snacks: allStores.snacks
+  },
+  ...
+})
+</code></pre>
+<h3>Transactions using an <code>Object</code> of stores</h3>
+<p>To perform transactions across a set of stores, create methods to co-ordinate the transaction methods.</p>
+<pre><code class="language-js">// A helper function for testing a store instance
+function isStore (store) {
+  return store.subscribe &amp;&amp; typeof store.subscribe === 'function'
+}
+
+// Create a number of stores
+const allStores = {
+  food: createStore('my.food.store', { ... }),
+  drinks: createStore('my.drinks.store', { ... }),
+  snacks: createStore('my.snacks.store', { ... }),
+  begin () {
+    Object.values(this).forEach(v =&gt; isStore(v) &amp;&amp; v.begin())
+  },
+  end () {
+    Object.values(this).forEach(v =&gt; isStore(v) &amp;&amp; v.end())
+  },
+  rollback () {
+    Object.values(this).forEach(v =&gt; isStore(v) &amp;&amp; v.rollback())
+  }
+}
+</code></pre>
+<h3>Clearing multiple stores</h3>
+<p>You can clear multiple stores using custom methods.</p>
+<pre><code class="language-js">// A helper function for testing a store instance
+function isStore (store) {
+  return store.subscribe &amp;&amp; typeof store.subscribe === 'function'
+}
+
+// Create a number of stores
+const allStores = {
+  food: createStore('my.food.store', { ... }),
+  drinks: createStore('my.drinks.store', { ... }),
+  snacks: createStore('my.snacks.store', { ... }),
+  clear (notifySubscribers = true) {
+    Object.values(this).forEach(v =&gt; isStore(v) &amp;&amp; v.clear(notifySubscribers))
+  }
+}
+</code></pre>
+<h2>Singleton store</h2>
+<p>If you want a single instance of a store without having to pass variables around, you can use the singleton pattern to create an instance that can be imported into individual files.
+Simply export a <code>const</code> and it will be treated as a singleton.</p>
+<pre><code class="language-js">// create a single singleton store
+export const store = createStore('an.example.store', { ... })
+
+// create multiple stores in a singleton
+export const allStores = {
+  food: createStore('my.food.store', { ... }),
+  drinks: createStore('my.drinks.store', { ... }),
+  snacks: createStore('my.snacks.store', { ... })
+}
+</code></pre>
+<h2>Persistence</h2>
+<p>To survive hard refreshes from the user, your state can be persisted to <code>sessionStorage</code> automatically.
+This will re-hydrate your store on initialisation.</p>
+<pre><code class="language-js">// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  persist: 'food' // this must be a unique namespace for the store
+})
+</code></pre>
+<h3><code>createPersist</code> function</h3>
+<p>You can optionally save state to <code>window.localStorage</code> (for persistence across browser sessions) using the <code>createPersist</code> function:</p>
+<pre><code class="language-js">import { createStore, createPersist } from 'https://unpkg.com/ficusjs?module'
+
+// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  persist: createPersist('food', 'local')
+})
+</code></pre>
+<p>When using the <code>createPersist</code> function, the following arguments must be supplied:</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>namespace</code></td>
+<td><code>string</code></td>
+<td>The unique namespace for the store</td>
+</tr>
+<tr>
+<td><code>storage</code></td>
+<td><code>string</code></td>
+<td>The storage mechanism to use - either <code>local</code> for <code>window.localStorage</code> or <code>session</code> for <code>window.sessionStorage</code> (default)</td>
+</tr>
+</tbody>
+</table>
+<h3>Custom persistence</h3>
+<p>You can provide a custom class and persist your application state in whichever way you choose.</p>
+<p>Four methods must be implemented:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setState(state)</code></td>
+<td>Save the state in the persistence store</td>
+</tr>
+<tr>
+<td><code>getState()</code></td>
+<td>Retrieve the state from the persistence store</td>
+</tr>
+<tr>
+<td><code>lastUpdated()</code></td>
+<td>Retrieve the last updated time of the state in milliseconds since the Unix Epoch</td>
+</tr>
+<tr>
+<td><code>removeState()</code></td>
+<td>Remove the state from the persistence store</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-js">import { createStore } from 'https://unpkg.com/ficusjs?module'
+
+class MyCustomPersist {
+  setState (state) {
+    // set the state
+  }
+
+  getState () {
+    // get the state
+  }
+
+  lastUpdated () {
+    // get the last updated time in milliseconds since the Unix Epoch
+  }
+
+  removeState () {
+    // remove the state - this is called by default when setState is null
+  }
+}
+
+// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  persist: new MyCustomPersist()
+})
+</code></pre>
+
+  </article>
+</div>
+<a href="#" class="cd-top text-replace"></a>
+
+<script src="js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="module" src="js/scribbler.js"></script>
+</body>
+</html>
