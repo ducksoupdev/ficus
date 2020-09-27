@@ -1,1 +1,1 @@
-window.onload=function(){"serviceWorker"in navigator&&navigator.serviceWorker.register('./js/sw.js')};
+window.onload=function(){"serviceWorker"in navigator&&navigator.serviceWorker.register('../sw.js')};
