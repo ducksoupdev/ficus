@@ -6,6 +6,11 @@ var filesToCache = [
   '/css/scribbler-doc.css',
   '/css/scribbler-global.css',
   '/css/scribbler-landing.css',
+  '/css/darcula.css',
+  '/js/highlight.pack.js',
+  '/js/scribbler.js',
+  '/img/angle_up.svg',
+  '/img/checkmark.svg',
   '/img/logo.svg'
 ]
 

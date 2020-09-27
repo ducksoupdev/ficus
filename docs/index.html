@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FicusJS documentation</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap">
   <link rel="stylesheet" href="css/darcula.css">
   <link rel="stylesheet" href="css/scribbler-global.css">
   <link rel="stylesheet" href="css/scribbler-doc.css">
@@ -43,30 +43,33 @@
 </svg>
 <div class="doc__bg"></div>
 <nav class="header">
-  <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
-  <ul class="menu">
-    <div class="menu__item toggle"><span></span></div>
-    <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
-    <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
-  </ul>
+  <div class="wrapper">
+    <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
+    <ul class="menu">
+      <div class="menu__item toggle"><span></span></div>
+      <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
+      <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
+    </ul>
+  </div>
 </nav>
 <div class="wrapper">
-  <aside class="doc__nav">
-    <ul>
-      <li class=""><a href="docs/getting-started" class="doc__nav-item">Getting started</a></li>
-      <li class=""><a href="docs/installation" class="doc__nav-item">Installation</a></li>
-      <li class=""><a href="docs/features" class="doc__nav-item">Features</a></li>
-      <li class=""><a href="docs/components" class="doc__nav-item">Components</a></li>
-      <li class=""><a href="docs/stores" class="doc__nav-item">Stores</a></li>
-      <li class=""><a href="docs/event-bus" class="doc__nav-item">Event bus</a></li>
-      <li class=""><a href="docs/modules" class="doc__nav-item">Modules</a></li>
-      <li class=""><a href="docs/browser-support" class="doc__nav-item">Browser support</a></li>
-      <li class=""><a href="docs/going-build-less" class="doc__nav-item">Going build-less</a></li>
-      <li class=""><a href="docs/legacy-browsers" class="doc__nav-item">Legacy browsers</a></li>
-      <li class=""><a href="https://github.com/ducksoupdev/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
-    </ul>  </aside>
-  <article class="doc__content">
-    <h1>FicusJS documentation</h1>
+  <div class="wrapper__content">
+    <aside class="doc__nav">
+      <ul>
+        <li class=""><a href="docs/getting-started" class="doc__nav-item">Getting started</a></li>
+        <li class=""><a href="docs/installation" class="doc__nav-item">Installation</a></li>
+        <li class=""><a href="docs/features" class="doc__nav-item">Features</a></li>
+        <li class=""><a href="docs/components" class="doc__nav-item">Components</a></li>
+        <li class=""><a href="docs/stores" class="doc__nav-item">Stores</a></li>
+        <li class=""><a href="docs/event-bus" class="doc__nav-item">Event bus</a></li>
+        <li class=""><a href="docs/modules" class="doc__nav-item">Modules</a></li>
+        <li class=""><a href="docs/browser-support" class="doc__nav-item">Browser support</a></li>
+        <li class=""><a href="docs/going-build-less" class="doc__nav-item">Going build-less</a></li>
+        <li class=""><a href="docs/legacy-browsers" class="doc__nav-item">Legacy browsers</a></li>
+        <li class=""><a href="https://github.com/ducksoupdev/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
+      </ul>    </aside>
+    <article class="doc__content">
+      <h1>FicusJS documentation</h1>
 <p>Welcome to the FicusJS documentation!</p>
 <h2>About</h2>
 <p>Browsers have improved a lot over the past years. It's now possible to do web development without requiring any build tools, using the native module loader of the browser. We think this is a great fit for FicusJS, and we recommend this as a general starting point.</p>
@@ -77,12 +80,14 @@
 <p>Ficus, pronounced <em>fick-us</em>, trees are a common plant in the home and office, mainly because they look like a typical tree with a single trunk which spreads into a canopy of leaves.
 This is similar to a web application with a spread of web components!</p>
 
-  </article>
+    </article>
+  </div>
 </div>
 <a href="#" class="cd-top text-replace"></a>
 
 <script src="js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script type="module" src="js/scribbler.js"></script>
+<script src="js/service-worker.js"></script>
 </body>
 </html>
