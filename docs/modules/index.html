@@ -78,11 +78,14 @@ How can you write a component once and use it in multiple applications?</p>
 <pre><code class="language-js">// import the required FicusJS functions
 import { createComponent, use } from 'https://unpkg.com/ficusjs?module'
 
+// import the renderer and html tagged template literal from the lit-html library
+import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+
 // import component library from a local path
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module)
+use(module, renderer, html)
 
 // in your template, use the component
 createComponent('my-component', {
@@ -99,12 +102,42 @@ createComponent('my-component', {
 <pre><code class="language-js">// import the use function
 import { use } from 'https://unpkg.com/ficusjs?module'
 
+// import the renderer and html tagged template literal from the lit-html library
+import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+
 // import component module from a local path
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module)
+use(module, renderer, html)
 </code></pre>
+<p>The following arguments must be provided to the <code>use</code> function:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>module</code></td>
+<td><code>object</code></td>
+<td>The imported <code>module</code></td>
+</tr>
+<tr>
+<td><code>renderer</code></td>
+<td><code>function</code></td>
+<td>The <code>renderer</code> function for passing to components</td>
+</tr>
+<tr>
+<td><code>html</code></td>
+<td><code>object</code></td>
+<td>The <code>html</code> tagged template literal for passing to components</td>
+</tr>
+</tbody>
+</table>
 <h2>Creating a module</h2>
 <p>A module is a set of functions for creating components, stores and/or events.
 This ensures just the definitions will be shared without the overhead of bundling the FicusJS runtime.</p>
@@ -112,6 +145,30 @@ This ensures just the definitions will be shared without the overhead of bundlin
 <p>A single Javascript file exports a named object <code>module</code> exposing a <code>create</code> method.
 The shared module <code>create</code> method will be invoked by the <code>use</code> function in the context of the running application and is passed a single <code>object</code> argument.</p>
 <p>It is the responsibility of the <code>create</code> method to use the <code>object</code> argument to create components, stores or events (anything required by the module).</p>
+<pre><code class="language-js">// Export a module object that is invoked by the `use` function
+export const module = {
+  create ({ /* arguments passed to the create function */ }) {
+    // create components or stores here
+  }
+}
+</code></pre>
+<h3>Async <code>create</code> method</h3>
+<p>You can return a <code>Promise</code> from the <code>create</code> method that contains async operations.</p>
+<pre><code class="language-js">// use async/await
+export const module = {
+  async create ({ /* arguments passed to the create function */ }) {
+    await asyncFunction()
+  }
+}
+
+// return a Promise
+export const module = {
+  create ({ /* arguments passed to the create function */ }) {
+    return asyncFunction()
+  }
+}
+</code></pre>
+<p>If returning a <code>Promise</code>, the calling module must handle the response before continuing execution.</p>
 <h3>When using the all features build</h3>
 <p>When using the all features build <code>dist/index.js</code>, the <code>object</code> argument will contain the following properties.</p>
 <table>
@@ -127,6 +184,16 @@ The shared module <code>create</code> method will be invoked by the <code>use</c
 <td><code>createComponent</code></td>
 <td><code>function</code></td>
 <td>The <code>createComponent</code> function</td>
+</tr>
+<tr>
+<td><code>renderer</code></td>
+<td><code>function</code></td>
+<td>The <code>renderer</code> function for component rendering</td>
+</tr>
+<tr>
+<td><code>html</code></td>
+<td><code>object</code></td>
+<td>The <code>html</code> tagged template literal for component rendering</td>
 </tr>
 <tr>
 <td><code>createEventBus</code></td>
@@ -163,7 +230,7 @@ The shared module <code>create</code> method will be invoked by the <code>use</c
 <p>The module will be created using the provided <code>object</code> argument.</p>
 <pre><code class="language-js">// Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ createComponent, createEventBus, createPersist, createStore, getEventBus, getStore, use }) {
+  create ({ createComponent, renderer, html, createEventBus, createPersist, createStore, getEventBus, getStore, use }) {
     // create components, stores or events here
   }
 }
@@ -194,7 +261,7 @@ export const module = {
     createComponent('shared-component', createSharedComponent(renderer, html, getStore))
 
     // import and use another module
-    use(anotherModule)
+    use(anotherModule, renderer, html)
   }
 }
 </code></pre>
@@ -215,6 +282,16 @@ export const module = {
 <td>The <code>createComponent</code> function</td>
 </tr>
 <tr>
+<td><code>renderer</code></td>
+<td><code>function</code></td>
+<td>The <code>renderer</code> function for component rendering</td>
+</tr>
+<tr>
+<td><code>html</code></td>
+<td><code>object</code></td>
+<td>The <code>html</code> tagged template literal for component rendering</td>
+</tr>
+<tr>
 <td><code>use</code></td>
 <td><code>function</code></td>
 <td>The <code>use</code> function for loading modules internally</td>
@@ -224,7 +301,7 @@ export const module = {
 <p>The module object will be created using the provided arguments.</p>
 <pre><code class="language-js">// Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ createComponent, use }) {
+  create ({ createComponent, renderer, html, use }) {
     // create components here
   }
 }
