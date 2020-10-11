@@ -57,6 +57,7 @@
         <li class=""><a href="docs/installation" class="doc__nav-item">Installation</a></li>
         <li class=""><a href="docs/features" class="doc__nav-item">Features</a></li>
         <li class=""><a href="docs/components" class="doc__nav-item">Components</a></li>
+        <li class=""><a href="docs/composition" class="doc__nav-item">Extending components</a></li>
         <li class=""><a href="docs/stores" class="doc__nav-item">Stores</a></li>
         <li class=""><a href="docs/event-bus" class="doc__nav-item">Event bus</a></li>
         <li class=""><a href="docs/modules" class="doc__nav-item">Modules</a></li>
@@ -65,6 +66,7 @@
         <li class=""><a href="docs/legacy-browsers" class="doc__nav-item">Legacy browsers</a></li>
         <li class=""><a href="https://github.com/ducksoupdev/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
         <li class=""><a href="docs/router" class="doc__nav-item">FicusJS router</a></li>
+        <li class=""><a href="docs/script" class="doc__nav-item">FicusJS script loader</a></li>
       </ul>    </aside>
     <article class="doc__content">
       <h1>Stores</h1>
@@ -312,6 +314,13 @@ try {
   store.rollback()
 }
 </code></pre>
+<h3><code>begin</code> method</h3>
+<p>The <code>begin</code> method starts a transaction.</p>
+<h3><code>end</code> method</h3>
+<p>The <code>end</code> method ends the transaction and notifies subscribers that the store state has changed.</p>
+<h3><code>rollback</code> method</h3>
+<p>The <code>rollback</code> method rolls back the store state changes carried out within the transaction.
+This is used if an error occurs, and the state needs to be reset.</p>
 <h2>Creating components with application state</h2>
 <p>Once you have created your store instance, simply pass it to each component so that it can react to state changes.
 Subscription to store changes will be handled automatically within the component.</p>

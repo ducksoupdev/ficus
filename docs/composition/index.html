@@ -5,7 +5,7 @@
   <base href="/">
   <meta name="description" content="Lightweight functions for developing applications using web components">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FicusJS documentation</title>
+  <title>FicusJS documentation - Extending components</title>
   <link rel="stylesheet" href="css/doc.css">
   <link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-icon-60x60.png">
@@ -69,16 +69,143 @@
         <li class=""><a href="docs/script" class="doc__nav-item">FicusJS script loader</a></li>
       </ul>    </aside>
     <article class="doc__content">
-      <h1>FicusJS documentation</h1>
-<p>Welcome to the FicusJS documentation!</p>
-<h2>About</h2>
-<p>Browsers have improved a lot over the past years. It's now possible to do web development without requiring any build tools, using the native module loader of the browser. We think this is a great fit for FicusJS, and we recommend this as a general starting point.</p>
-<h2>Aligns with standards</h2>
-<p>FicusJS aligns with standard browser APIs which means it is not based on any proprietary code or libraries.</p>
-<p>As it is based on standards, it has longevity and is a good choice for enterprise web applications.</p>
-<h2>Why ficus?</h2>
-<p>Ficus, pronounced <em>fick-us</em>, trees are a common plant in the home and office, mainly because they look like a typical tree with a single trunk which spreads into a canopy of leaves.
-This is similar to a web application with a spread of web components!</p>
+      <h1>Extending components</h1>
+<p>FicusJS provides a set of functions for extending components.</p>
+<p>You can also write your own functions.</p>
+<h2><code>withStore</code> function</h2>
+<p>The <code>withStore</code> function extends a component and makes working with stores easier in component rendering, computed getters and methods.</p>
+<pre><code class="language-js">import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
+
+// import the renderer and html tagged template literal from the lit-html library
+import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+
+// import a single store or object of stores from a local file
+import { store } from './store.js'
+
+createComponent(
+  'my-component',
+  withStore(store, {
+    renderer,
+    props: {
+      personName: {
+        type: String,
+        required: true
+      }
+    },
+    render () {
+      return html`
+        &lt;p&gt;
+          ${this.store.state.greeting}, there! My name is ${this.props.personName}
+        &lt;/p&gt;
+      `
+    }
+  })
+)
+</code></pre>
+<p>The <code>withStore</code> function provides a <code>this.store</code> property within the component.
+It also makes the component reactive to store changes as well as handling automatic store subscriptions based on the component lifecycle hooks.
+It will also refresh computed getters when store state changes.</p>
+<h3><code>setStore</code> method</h3>
+<p>The <code>setStore</code> method can be called when a store instance needs to be set after the component has initialised.
+The method accepts a <code>store</code> argument which can be a single store instance or object of store instances.</p>
+<pre><code class="language-js">{
+  someMethod () {
+    const store = getStoreSomehow()
+    this.setStore(store)
+  }
+}
+</code></pre>
+<h2><code>withEventBus</code> function</h2>
+<p>The <code>withEventBus</code> function extends a component and makes working with an event bus easier in component methods.</p>
+<pre><code class="language-js">import { createComponent, withEventBus } from 'https://unpkg.com/ficusjs?module'
+
+// import the renderer and html tagged template literal from the lit-html library
+import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+
+// import an event bus from a local file
+import { eventBus } from './event-bus.js'
+
+createComponent(
+  'my-component',
+  withEventBus(eventBus, {
+    renderer,
+    buttonClicked () {
+      this.eventBus.publish('increment', undefined)
+    },
+    render () {
+      return html`&lt;button type=&quot;button&quot; @click=${this.buttonClicked}&gt;Increment&lt;/button&gt;`
+    }
+  })
+)
+</code></pre>
+<p>The <code>withEventBus</code> function provides a <code>this.eventBus</code> property within the component.
+It handles automatic event bus subscription based on the component lifecycle hooks.</p>
+<h3><code>setEventBus</code> method</h3>
+<p>The <code>setEventBus</code> method can be called when an instance needs to be set after the component has initialised.
+The method accepts an <code>eventBus</code> argument which is a single event instance.</p>
+<pre><code class="language-js">{
+  someMethod () {
+    const eventBus = getEventBus()
+    this.setEventBus(eventBus)
+  }
+}
+</code></pre>
+<h2><code>withStateTransactions</code> function</h2>
+<p>The <code>withStateTransactions</code> function extends a component with transactions so multiple state changes can occur without triggering a re-render.</p>
+<pre><code class="language-js">import { createComponent, withStateTransactions } from 'https://unpkg.com/ficusjs?module'
+
+// import the renderer and html tagged template literal from the lit-html library
+import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+
+createComponent(
+  'my-like-component',
+  withStateTransactions({
+    renderer,
+    state () {
+      return { count: 0, message: null, status: 'unliked' }
+    },
+    like () {
+      // start a transaction
+      this.beginTransaction()
+
+      // change some state
+      this.state.count = this.state.count + 1
+      this.state.message = 'Thanks for liking this!'
+
+      // save the like to the server
+      window.fetch('/api/likes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ count: this.state.count, updatedBy: 'Jane Doe' })
+      })
+      .then(res =&gt; res.json())
+      .then(data =&gt; {
+        this.state.status = 'liked'
+        this.endTransaction()
+      })
+      .catch(err =&gt; {
+        this.rollbackTransaction()
+        this.state.status = 'error'
+      })
+    },
+    render () {
+      if (this.state.status === 'liked') {
+         return html`&lt;p&gt;${this.state.message}&lt;/p&gt;`
+      }
+      return html`&lt;button type=&quot;button&quot; @click=${this.like}&gt;Like&lt;/button&gt;`
+    }
+  })
+)
+</code></pre>
+<p>A transaction is a sequence of operations performed on state as a single logical unit of work.
+The transaction can be either all committed (applied to state) or all rolled back (undone from state).</p>
+<h3><code>beginTransaction</code> method</h3>
+<p>The <code>beginTransaction</code> method starts a transaction.</p>
+<h3><code>endTransaction</code> method</h3>
+<p>The <code>endTransaction</code> method ends the transaction and triggers a component render.</p>
+<h3><code>rollbackTransaction</code> method</h3>
+<p>The <code>rollbackTransaction</code> method rolls back the state changes carried out within the transaction.
+This is used if an error occurs, and the state needs to be reset.</p>
 
     </article>
   </div>

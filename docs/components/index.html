@@ -57,6 +57,7 @@
         <li class=""><a href="docs/installation" class="doc__nav-item">Installation</a></li>
         <li class=""><a href="docs/features" class="doc__nav-item">Features</a></li>
         <li class=""><a href="docs/components" class="doc__nav-item">Components</a></li>
+        <li class=""><a href="docs/composition" class="doc__nav-item">Extending components</a></li>
         <li class=""><a href="docs/stores" class="doc__nav-item">Stores</a></li>
         <li class=""><a href="docs/event-bus" class="doc__nav-item">Event bus</a></li>
         <li class=""><a href="docs/modules" class="doc__nav-item">Modules</a></li>
@@ -65,6 +66,7 @@
         <li class=""><a href="docs/legacy-browsers" class="doc__nav-item">Legacy browsers</a></li>
         <li class=""><a href="https://github.com/ducksoupdev/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
         <li class=""><a href="docs/router" class="doc__nav-item">FicusJS router</a></li>
+        <li class=""><a href="docs/script" class="doc__nav-item">FicusJS script loader</a></li>
       </ul>    </aside>
     <article class="doc__content">
       <h1>Components</h1>
@@ -193,18 +195,6 @@ createComponent('my-component', {
 <td><code>function</code></td>
 <td>Invoked each time the component is disconnected from the DOM</td>
 </tr>
-<tr>
-<td><code>store</code></td>
-<td></td>
-<td><code>object</code></td>
-<td>A store instance or object of store instances. Subscription to store changes are handled automatically within the component</td>
-</tr>
-<tr>
-<td><code>eventBus</code></td>
-<td></td>
-<td><code>object</code></td>
-<td>An event bus instance. Subscriptions based on lifecycle hooks are automatically handled within the component</td>
-</tr>
 </tbody>
 </table>
 <h2>Root definition</h2>
@@ -288,9 +278,9 @@ Props will be observed by default which means they react to changes.</p>
 exampleComponentInstance.className = 'another-value'
 </code></pre>
 <h2>Computed getters</h2>
-<p>Getters are functions that are used like properties in your component. They are defined with the <code>computed</code> property.</p>
-<p>They are memoized functions which means the result of the getter is cached for subsequent executions. This is useful when creating projections from large sets of data.
-Setting local state will automatically reset the computed cache.</p>
+<p>Computed getters are functions that are used like properties in your component. They are defined with the <code>computed</code> property.</p>
+<p>They are memoized functions which means the result of the getter is cached for subsequent executions. This is useful when creating projections from large sets of data.</p>
+<p>Setting local state will automatically reset the computed cache.</p>
 <p>You can access getters with <code>this</code> in your component <code>render</code> function.</p>
 <pre><code class="language-js">computed: {
   myGetter () {
@@ -373,8 +363,9 @@ This prevents events or callbacks from triggering when a component disconnects a
 }
 </code></pre>
 <h3><code>mounted</code> function</h3>
-<p>The <code>mounted</code> hook will be invoked when the component has been connected to the DOM. This may trigger before the components contents have been fully rendered.
-This is triggered by the custom element <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements"><code>connectedCallback</code></a> lifecycle callback.</p>
+<p>The <code>mounted</code> hook will be invoked when the component has mounted in the DOM.</p>
+<p>This may trigger before the components contents have been fully rendered.</p>
+<p>This is triggered by the custom element <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements"><code>connectedCallback</code></a> lifecycle callback.</p>
 <pre><code class="language-js">{
   mounted () {
     // do something when the component is mounted!
@@ -382,8 +373,10 @@ This is triggered by the custom element <a href="https://developer.mozilla.org/e
 }
 </code></pre>
 <h3><code>updated</code> function</h3>
-<p>The <code>updated</code> hook will be invoked each time the component has been moved or reconnected to the DOM.
+<p>The <code>updated</code> hook will be invoked each time the component state changes.</p>
+<p>It is also invoked when the component has been moved or is reconnected to the DOM.
 This is triggered by the custom element <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements"><code>connectedCallback</code></a> lifecycle callback.</p>
+<p>The component's DOM will have updated when this hook runs and may trigger before the components contents have been fully rendered.</p>
 <pre><code class="language-js">{
   updated () {
     // do something when the component is updated!
@@ -399,37 +392,17 @@ This is triggered by the custom element <a href="https://developer.mozilla.org/e
   }
 }
 </code></pre>
-<h2>Instance methods</h2>
-<p>Instance methods allow internal properties to be changed within the component itself.</p>
-<h3><code>setStore</code> method</h3>
-<p>The <code>setStore</code> method can be called when a store instance needs to be set after the component has initialised.
-The method accepts a <code>store</code> argument which can be a single store instance or object of store instances.</p>
-<pre><code class="language-js">{
-  mounted () {
-    const store = getStoreSomehow()
-    this.setStore(store)
-  }
-}
-</code></pre>
-<h3><code>setEventBus</code> method</h3>
-<p>The <code>setEventBus</code> method can be called when an instance needs to be set after the component has initialised.
-The method accepts an <code>eventBus</code> argument which is a single event instance.</p>
-<pre><code class="language-js">{
-  mounted () {
-    const eventBus = getEventBus()
-    this.setEventBus(eventBus)
-  }
-}
-</code></pre>
 <h2>Rendering</h2>
-<p>When the <code>render</code> function has been called, the result will be passed to the <code>renderer</code> function for updating the DOM.
-This is handled within the component lifecycle.</p>
-<p>There are a number of renderers available and can be added to suit your requirements. The following renderers have been tested with FicusJS:</p>
+<p>A <code>renderer</code> function <strong>must</strong> be provided when creating a new component. This allows any renderer to be plugged into a component.</p>
+<p>There are a number of renderers available and can be added to suit your needs. The following renderers have been tested with FicusJS:</p>
 <ul>
 <li><a href="https://www.npmjs.com/package/lit-html">lit-html</a></li>
 <li><a href="https://www.npmjs.com/package/uhtml">uhtml</a></li>
 <li><a href="https://www.npmjs.com/package/htm">htm and Preact</a></li>
+<li><code>document.createElement</code></li>
 </ul>
+<p>When the <code>render</code> function has been called, the result will be passed to the <code>renderer</code> function for updating the DOM.
+This is handled within the component lifecycle.</p>
 <h3>Renderer function</h3>
 <p>The <code>renderer</code> function can be any function that creates HTML from the result of the <code>render</code> function.</p>
 <p>The renderer function will be invoked with the following arguments in order:</p>
@@ -458,6 +431,29 @@ This is handled within the component lifecycle.</p>
   renderer (what, where) {
     // the uhtml renderer requires a different argument order
     renderer(where, what)
+  }
+}
+</code></pre>
+<h4><code>document.createElement</code> renderer</h4>
+<p>If you want to use the standard <code>document.createElement</code> renderer, you can supply a <code>renderer</code> function like the following.</p>
+<pre><code class="language-js">function renderer (what, where) {
+    // remove any existing elements
+    while (where.firstChild) where.removeChild(where.firstChild)
+
+    // create a new in-memory element
+    const element = document.createElement('div')
+    element.innerHTML = what
+
+    // add the element to the DOM
+    where.appendChild(element)
+}
+</code></pre>
+<p>In your component, return a template literal string containing HTML.</p>
+<pre><code class="language-js">{
+  render () {
+    return `
+      &lt;div&gt;Some HTML content with ${someVariable}&lt;/div&gt;
+    `
   }
 }
 </code></pre>
