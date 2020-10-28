@@ -75,8 +75,8 @@
 <pre><code class="language-html">&lt;hello-world&gt;&lt;/hello-world&gt;
 
 &lt;script type=&quot;module&quot;&gt;
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
-import { createComponent } from 'https://unpkg.com/ficusjs?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
 
 createComponent('hello-world', {
   renderer,

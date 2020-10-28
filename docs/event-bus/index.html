@@ -84,23 +84,29 @@
 </code></pre>
 <h2><code>createEventBus</code> function</h2>
 <p>Once you have created your events instance using <code>createEventBus</code>, simply pass it to each component:</p>
-<pre><code class="language-js">// A new component
-createComponent('my-component', {
-  eventBus,
-  ...
-})
+<pre><code class="language-js">import { createComponent, withEventBus } from 'https://unpkg.com/ficusjs?module'
+
+// A new component
+createComponent(
+  'my-component',
+  withEventBus(eventBus, {
+    /* pass component creation options here */
+  })
+)
 </code></pre>
 <h2><code>getEventBus</code> function</h2>
 <p>The <code>getEventBus</code> function is a quick way to retrieve the events instance.
 If the event bus has not yet been created, <code>getEventBus</code> will create a new instance automatically.</p>
 <pre><code class="language-js">// import the function
-import { getEventBus } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, getEventBus, withEventBus } from 'https://unpkg.com/ficusjs?module'
 
 // use it within a component
-createComponent('my-component', {
-  eventBus: getEventBus(),
-  ...
-})
+createComponent(
+  'my-component',
+  withEventBus(getEventBus(), {
+    /* pass component creation options here */
+  })
+)
 </code></pre>
 <h2>Subscribe</h2>
 <p>To be notified when a particular event will be published, use the <code>subscribe</code> method to register a callback function.

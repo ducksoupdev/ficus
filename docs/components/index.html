@@ -78,10 +78,11 @@ Component names require a dash to be used in them; they <strong>cannot</strong> 
 <h2>Example</h2>
 <p>Import the <code>createComponent</code> function together with a renderer function and <code>html</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates">template literal tag</a> into your Javascript file:</p>
 <p><strong>my-component.js</strong></p>
-<pre><code class="language-js">import { createComponent } from 'https://unpkg.com/ficusjs?module'
+<pre><code class="language-js">// import the createComponent function
+import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { render as renderer, html } from 'https://unpkg.com/lit-html?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
 
 createComponent('my-component', {
   renderer,
@@ -434,29 +435,16 @@ This is handled within the component lifecycle.</p>
   }
 }
 </code></pre>
-<h4><code>document.createElement</code> renderer</h4>
-<p>If you want to use the standard <code>document.createElement</code> renderer, you can supply a <code>renderer</code> function like the following.</p>
-<pre><code class="language-js">function renderer (what, where) {
-    // remove any existing elements
-    while (where.firstChild) where.removeChild(where.firstChild)
-
-    // create a new in-memory element
-    const element = document.createElement('div')
-    element.innerHTML = what
-
-    // add the element to the DOM
-    where.appendChild(element)
-}
-</code></pre>
-<p>In your component, return a template literal string containing HTML.</p>
-<pre><code class="language-js">{
-  render () {
-    return `
-      &lt;div&gt;Some HTML content with ${someVariable}&lt;/div&gt;
-    `
-  }
-}
-</code></pre>
+<h3>Minified ES module renderers</h3>
+<p>The <a href="https://www.npmjs.com/package/ficusjs-renderers"><code>ficusjs-renderers</code></a> package provides a tested set of renderers as ES modules to make working with them much easier.</p>
+<p>These renderers are available as minified ES module bundles:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/lit-html">lit-html</a></li>
+<li><a href="https://www.npmjs.com/package/uhtml">uhtml</a></li>
+<li><a href="https://www.npmjs.com/package/htm">htm and Preact</a></li>
+<li><code>document.createElement</code></li>
+</ul>
+<p>For more details, visit <a href="https://github.com/ficusjs/ficusjs-renderers">https://github.com/ficusjs/ficusjs-renderers</a></p>
 <h3>Rendering props</h3>
 <p>Props can be rendered in the template.</p>
 <pre><code class="language-js">{
