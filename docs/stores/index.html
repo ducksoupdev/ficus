@@ -64,7 +64,8 @@
         <li class=""><a href="docs/browser-support" class="doc__nav-item">Browser support</a></li>
         <li class=""><a href="docs/going-build-less" class="doc__nav-item">Going build-less</a></li>
         <li class=""><a href="docs/legacy-browsers" class="doc__nav-item">Legacy browsers</a></li>
-        <li class=""><a href="https://github.com/ducksoupdev/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
+        <li class=""><a href="https://github.com/ficusjs/ficusjs/tree/master/examples" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Examples</a></li>
+        <li class=""><a href="https://github.com/ficusjs/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
         <li class=""><a href="docs/router" class="doc__nav-item">FicusJS router</a></li>
         <li class=""><a href="docs/script" class="doc__nav-item">FicusJS script loader</a></li>
       </ul>    </aside>
@@ -321,20 +322,6 @@ try {
 <h3><code>rollback</code> method</h3>
 <p>The <code>rollback</code> method rolls back the store state changes carried out within the transaction.
 This is used if an error occurs, and the state needs to be reset.</p>
-<h2>Creating components with application state</h2>
-<p>Once you have created your store instance, simply pass it to each component so that it can react to state changes.
-Subscription to store changes will be handled automatically within the component.</p>
-<pre><code class="language-js">// An initialised store. Params omitted for brevity
-const store = createStore('an.example.store', {
-  ...
-})
-
-// A new component
-createComponent('my-component', {
-  store,
-  ...
-})
-</code></pre>
 <h2>Multiple stores</h2>
 <p>You can create as many stores as you want to separate your application state.</p>
 <h3>Manage multiple store instances with an <code>Object</code></h3>
@@ -348,25 +335,31 @@ const allStores = {
 }
 
 // Pass a relevant store to a component
-createComponent('my-component', {
-  store: allStores.drinks,
-  ...
-})
+createComponent(
+  'my-component',
+  withStore(allStores.drinks, {
+    ...
+  })
+)
 
 // Or pass all the stores to a component
-createComponent('my-component', {
-  store: allStores,
-  ...
-})
+createComponent(
+  'my-component',
+  withStore(allStores, {
+    ...
+  })
+)
 
 // Or just pass the required stores to a component
-createComponent('my-component', {
-  store: {
+createComponent(
+  'my-component',
+  withStore({
     food: allStores.food,
     snacks: allStores.snacks
-  },
-  ...
-})
+  }, {
+    ...
+  })
+)
 </code></pre>
 <h3>Transactions using an <code>Object</code> of stores</h3>
 <p>To perform transactions across a set of stores, create methods to co-ordinate the transaction methods.</p>
@@ -513,6 +506,26 @@ class MyCustomPersist {
 const store = createStore('an.example.store', {
   persist: new MyCustomPersist()
 })
+</code></pre>
+<h2>Usage in components</h2>
+<p>Once you have created your store instance, the <code>withStore</code> function extends a component and makes working with stores easier in component rendering, computed getters and methods.
+Subscription to store changes will be handled automatically within the component.</p>
+<p>See <a href="/docs/composition">extending components</a> for more on the <code>withStore</code> function.</p>
+<pre><code class="language-js">import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+// An initialised store. Params omitted for brevity
+const store = createStore('an.example.store', {
+  ...
+})
+
+// A new component
+createComponent(
+  'my-component',
+  withStore(store, {
+    ...
+  })
+)
 </code></pre>
 
     </article>

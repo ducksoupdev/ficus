@@ -64,7 +64,8 @@
         <li class=""><a href="docs/browser-support" class="doc__nav-item">Browser support</a></li>
         <li class=""><a href="docs/going-build-less" class="doc__nav-item">Going build-less</a></li>
         <li class=""><a href="docs/legacy-browsers" class="doc__nav-item">Legacy browsers</a></li>
-        <li class=""><a href="https://github.com/ducksoupdev/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
+        <li class=""><a href="https://github.com/ficusjs/ficusjs/tree/master/examples" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Examples</a></li>
+        <li class=""><a href="https://github.com/ficusjs/ficusjs/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="doc__nav-item">Changelog</a></li>
         <li class=""><a href="docs/router" class="doc__nav-item">FicusJS router</a></li>
         <li class=""><a href="docs/script" class="doc__nav-item">FicusJS script loader</a></li>
       </ul>    </aside>
@@ -122,27 +123,33 @@ unsubscribe()
 <p>When you want to notify subscribers, you need to <code>publish</code> an event:</p>
 <pre><code class="language-js">eventBus.publish('myTopic', data)
 </code></pre>
-<h2>Creating components with events</h2>
-<p>Once you have created your events instance, simply pass it to each component.</p>
+<h2>Usage in components</h2>
+<p>Once you have created your events instance, the <code>withEventBus</code> function extends a component and makes working with an event bus easier in component methods.</p>
 <p>Subscriptions based on lifecycle hooks will be automatically handled within the component.
-You need to provide the initial topic subscription and then once established, subscriptions
-will be handled automatically when the component fires the removed or updated lifecycle hook.</p>
-<pre><code class="language-js">const eventBus = createEventBus()
+You need to provide the initial topic subscription (use the <code>created</code> or <code>mounted</code> lifecycle hook) and then once established, subscriptions
+will be handled automatically when the component fires the <code>removed</code> or <code>updated</code> lifecycle hook.</p>
+<p>See <a href="/docs/composition">extending components</a> for more on the <code>withEventBus</code> function.</p>
+<pre><code class="language-js">import { createComponent, createEventBus, withEventBus } from 'https://unpkg.com/ficusjs?module'
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+const eventBus = createEventBus()
 
 // A new component
-createComponent('my-component', {
-  renderer,
-  eventBus,
-  handleEvent (data) {
-    /* handle event here */
-  },
-  mounted () {
-    this.events.subscribe('my-event', this.handleEvent)
-  },
-  render () {
-    /* handle render here */
-  }
-})
+createComponent(
+  'my-component',
+  withEventBus(eventBus, {
+    renderer,
+    handleEvent (data) {
+      /* handle event here */
+    },
+    mounted () {
+      this.events.subscribe('my-event', this.handleEvent)
+    },
+    render () {
+      /* handle render here */
+    }
+  })
+)
 </code></pre>
 
     </article>
