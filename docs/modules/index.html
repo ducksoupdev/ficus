@@ -88,7 +88,7 @@ import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module, renderer, html)
+use(module, { renderer, html })
 
 // in your template, use the component
 createComponent('my-component', {
@@ -112,7 +112,7 @@ import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/
 import { module } from './path/to/component-module.esm.js'
 
 // import the components into your application
-use(module, renderer, html)
+use(module, { renderer, html })
 </code></pre>
 <p>The following arguments <strong>must</strong> be provided to the <code>use</code> function:</p>
 <table>
@@ -130,15 +130,15 @@ use(module, renderer, html)
 <td>The imported <code>module</code></td>
 </tr>
 <tr>
-<td><code>renderer</code></td>
-<td><code>function</code></td>
-<td>The <code>renderer</code> function for passing to components</td>
+<td><code>helpers</code></td>
+<td><code>object</code></td>
+<td>A helpers object for passing to components. This <strong>must</strong> contain the <code>renderer</code> function as a named property</td>
 </tr>
 </tbody>
 </table>
-<p>Additional arguments can be provided to the <code>use</code> function and will be passed to the module. For example; the <code>html</code> tagged template literal can be passed for module components to return HTML content.</p>
-<pre><code class="language-js">// pass the html tagged template literal to the module for rendering
-use(module, renderer, html)
+<p>The <code>helpers</code> object <strong>must</strong> contain the <code>renderer</code> function as named property. Additional helpers can be provided in the <code>helpers</code> object and will be passed to the module. For example; the <code>html</code> tagged template literal can be passed for module components to return HTML content.</p>
+<pre><code class="language-js">// pass the renderer and the html tagged template literal to the module for rendering
+use(module, { renderer, html })
 </code></pre>
 <h2>Creating a module</h2>
 <p>A module is a set of functions for creating components, stores and/or events.
@@ -151,7 +151,7 @@ The shared module <code>create</code> method will be invoked by the <code>use</c
 <p>It is the responsibility of the <code>create</code> method to use the <code>object</code> argument to create components, stores or events (anything required by the module).</p>
 <pre><code class="language-js">// Export a module object that is invoked by the `use` function
 export const module = {
-  create ({ /* arguments passed to the create function */ }) {
+  create (helpers) {
     // create stuff here
   }
 }
@@ -160,21 +160,21 @@ export const module = {
 <p>You can return a <code>Promise</code> from the <code>create</code> method that contains async operations.</p>
 <pre><code class="language-js">// use async/await
 export const module = {
-  async create ({ /* arguments passed to the create function */ }) {
+  async create (helpers) {
     await asyncFunction()
   }
 }
 
 // return a Promise
 export const module = {
-  create ({ /* arguments passed to the create function */ }) {
+  create (helpers) {
     return asyncFunction()
   }
 }
 </code></pre>
 <p>If returning a <code>Promise</code>, the calling module must handle the response before continuing execution.</p>
 <h3>When using the all features build</h3>
-<p>When using the all features build <code>dist/index.js</code>, the <code>object</code> argument will contain the following properties.</p>
+<p>When using the all features build <code>dist/index.js</code>, the helpers <code>object</code> will contain the following properties.</p>
 <table>
 <thead>
 <tr>
@@ -226,7 +226,7 @@ export const module = {
 </tr>
 </tbody>
 </table>
-<p>Additional arguments provided to the <code>use</code> function will be passed to the module. For example; the <code>html</code> tagged template literal can be passed for module components to return HTML content.</p>
+<p>Additional arguments provided in the <code>helpers</code> object will be passed to the module. For example; the <code>html</code> tagged template literal can be passed for module components to return HTML content.</p>
 <pre><code class="language-js">// Export a module object that is invoked by the `use` function
 export const module = {
   create (helpers) {
@@ -260,12 +260,12 @@ export const module = {
     createComponent('shared-component', createSharedComponent(renderer, html, getStore))
 
     // import and use another module
-    use(anotherModule, renderer, html)
+    use(anotherModule, { renderer, html })
   }
 }
 </code></pre>
 <h3>When using the component build only</h3>
-<p>When using the component only <code>dist/component.js</code> without stores and events, the <code>object</code> argument will contain the following properties:</p>
+<p>When using the component only <code>dist/component.js</code> without stores and events, the helpers <code>object</code> argument will contain the following properties:</p>
 <table>
 <thead>
 <tr>
@@ -292,7 +292,7 @@ export const module = {
 </tr>
 </tbody>
 </table>
-<p>Additional arguments provided to the <code>use</code> function will be passed to the module. For example; the <code>html</code> tagged template literal can be passed for module components to return HTML content.</p>
+<p>Additional arguments provided in the <code>helpers</code> object will be passed to the module. For example; the <code>html</code> tagged template literal can be passed for module components to return HTML content.</p>
 <pre><code class="language-js">// Export a module object that is invoked by the `use` function
 export const module = {
   create (helpers) {
