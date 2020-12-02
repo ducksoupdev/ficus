@@ -207,6 +207,32 @@ The transaction can be either all committed (applied to state) or all rolled bac
 <h3><code>rollbackTransaction</code> method</h3>
 <p>The <code>rollbackTransaction</code> method rolls back the state changes carried out within the transaction.
 This is used if an error occurs, and the state needs to be reset.</p>
+<h2><code>withStyles</code> function</h2>
+<p>The <code>withStyles</code> function extends a component and makes working with component styles more efficient
+by injecting CSS into the <code>&lt;head&gt;</code> once for all component instances.</p>
+<pre><code class="language-js">import { createComponent, withStyles } from 'https://unpkg.com/ficusjs?module'
+
+// import the renderer and html tagged template literal from the lit-html library
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+createComponent(
+  'my-component',
+  withStyles({
+    renderer,
+    styles () {
+      return `
+        my-component button {
+          background-color: yellow;
+          color: black;
+        }
+      `
+    },
+    render () {
+      return html`&lt;button type=&quot;button&quot;&gt;A styled button&lt;/button&gt;`
+    }
+  })
+)
+</code></pre>
 
     </article>
   </div>
