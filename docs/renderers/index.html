@@ -5,7 +5,7 @@
   <base href="/">
   <meta name="description" content="Lightweight functions for developing applications using web components">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FicusJS documentation - Features</title>
+  <title>FicusJS documentation - Renderers</title>
   <link rel="stylesheet" href="css/doc.css">
   <link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-icon-60x60.png">
@@ -73,27 +73,76 @@
         <li class=""><a href="docs/script" class="doc__nav-item">FicusJS script loader</a></li>
       </ul>    </aside>
     <article class="doc__content">
-      <h1>Features</h1>
+      <h1>FicusJS renderers</h1>
+<p>Minified ES module renderers for <a href="/docs/components/">FicusJS components</a>.</p>
+<p>The <a href="https://github.com/ficusjs/ficusjs-renderers">FicusJS renderers</a> package provides a tested set of renderers as ES modules to make working with them much easier.</p>
+<h2>Summary</h2>
+<p>A <code>renderer</code> function must be provided when creating a new <a href="/docs/components/">FicusJS component</a>.
+This allows any tagged template literal renderer to be plugged into a component.</p>
+<p>The following renderers are available as minified bundles.</p>
 <ul>
-<li>Functional programming patterns</li>
-<li>Declarative component creator</li>
-<li>Reactive components</li>
-<li>Choose your own renderer</li>
-<li>Extend components using functions</li>
-<li>Application state management with stores</li>
-<li>Application event bus</li>
-<li>Small footprint
-<ul>
-<li>All features - 3.56 KB gzipped</li>
-<li>Components - 1.89 KB gzipped</li>
-<li>Stores - 1.21 KB gzipped</li>
-<li>Event bus - 271 B gzipped</li>
+<li><a href="https://www.npmjs.com/package/lit-html">lit-html</a></li>
+<li><a href="https://www.npmjs.com/package/uhtml">uhtml</a></li>
+<li><a href="https://www.npmjs.com/package/htm">htm and Preact</a></li>
+<li><code>document.createElement</code></li>
 </ul>
-</li>
-<li>Features can be loaded independently or use the all features bundle</li>
-<li>No dependencies</li>
-<li>Works with all server-side and client-side frameworks</li>
-</ul>
+<h2><code>lit-html</code></h2>
+<p>The <a href="https://www.npmjs.com/package/lit-html">lit-html</a> renderer is available in this package.</p>
+<pre><code class="language-js">// import the renderer function and the html tagged template literal
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+createComponent('test-comp', {
+  renderer,
+  render () {
+    return html`
+      &lt;div&gt;Some HTML content with ${someVariable}&lt;/div&gt;
+    `
+  }
+})
+</code></pre>
+<h2><code>uhtml</code></h2>
+<p>The <a href="https://www.npmjs.com/package/uhtml">uhtml</a> renderer is available in this package.</p>
+<pre><code class="language-js">// import the renderer function and the html tagged template literal
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/uhtml.js'
+
+createComponent('test-comp', {
+  renderer,
+  render () {
+    return html`
+      &lt;div&gt;Some HTML content with ${someVariable}&lt;/div&gt;
+    `
+  }
+})
+</code></pre>
+<h2><code>htm</code> and <code>Preact</code></h2>
+<p>The <a href="https://www.npmjs.com/package/htm">htm and Preact</a> renderer is available in this package.</p>
+<pre><code class="language-js">// import the renderer function and the html tagged template literal
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/htm.js'
+
+createComponent('test-comp', {
+  renderer,
+  render () {
+    return html`
+      &lt;div&gt;Some HTML content with ${someVariable}&lt;/div&gt;
+    `
+  }
+})
+</code></pre>
+<h2><code>document.createElement</code></h2>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"><code>document.createElement</code></a> renderer is available in this package.
+In your component, return a template literal string containing HTML.</p>
+<p>This is only the <code>renderer</code> function and <strong>does not use</strong> a tagged template literal for rendering.</p>
+<pre><code class="language-js">import { renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/create-element.js'
+
+createComponent('test-comp', {
+  renderer,
+  render () {
+    return `
+      &lt;div&gt;Some HTML content with ${someVariable}&lt;/div&gt;
+    `
+  }
+})
+</code></pre>
 
     </article>
   </div>
