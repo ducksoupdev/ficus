@@ -322,6 +322,65 @@ This also allows you to use prop values as initial state.</p>
   }
 }
 </code></pre>
+<h3>Updating state</h3>
+<p>Updating state can be done using assignment or the <code>setState</code> method.</p>
+<h4>State assignment</h4>
+<p>Updating state values can be done using direct assignment.</p>
+<pre><code class="language-js">this.state.name = 'new name value'
+</code></pre>
+<h4><code>setState</code> method</h4>
+<p>The <code>setState</code> method can be used to set one or more state values in a single transaction. This will only trigger a single render update. An optional callback can be provided which is invoked after rendering has occurred.</p>
+<p>The <code>setState</code> function takes two arguments:</p>
+<ol>
+<li>State setter function (receives the current state as an argument)</li>
+<li>An optional callback which is invoked after rendering</li>
+</ol>
+<pre><code class="language-js">this.setState(
+  (state) =&gt; {
+    return {
+      // return new state property values
+    }
+  },
+  () =&gt; {
+    // do something after rendering
+  }
+)
+</code></pre>
+<p>Example component using <code>setState</code> method</p>
+<pre><code class="language-js">// import the createComponent function
+import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+
+// import the renderer and html tagged template literal from the lit-html library
+import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+
+createComponent('set-state-example', {
+  renderer,
+  state () {
+    return {
+      count: 0,
+      isEven: false,
+      color: 'secondary'
+    }
+  },
+  increment () {
+    this.setState(
+      (state) =&gt; {
+        const count = state.count + 1
+        const isEven = count % 2 === 0
+        return {
+          count,
+          isEven,
+          color: isEven ? 'success' : 'info'
+        }
+      },
+      () =&gt; console.log('Component did render!')
+    )
+  },
+  render () {
+    return html`&lt;button type=&quot;button&quot; @click=${this.increment} class=&quot;${this.state.color}&quot;&gt;Count is&amp;nbsp;&lt;strong&gt;${this.state.count}&lt;/strong&gt;&lt;/button&gt;`
+  }
+})
+</code></pre>
 <h2>Methods</h2>
 <p>It is common to be able to call a method and perform an action. To achieve this, you can define methods when creating your component.
 Methods are functions that can be defined anywhere in the component definition object.</p>

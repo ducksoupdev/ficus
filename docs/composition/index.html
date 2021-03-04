@@ -212,7 +212,7 @@ The transaction can be either all committed (applied to state) or all rolled bac
 This is used if an error occurs, and the state needs to be reset.</p>
 <h2><code>withStyles</code> function</h2>
 <p>The <code>withStyles</code> function extends a component and makes working with component styles more efficient
-by injecting CSS into the <code>&lt;head&gt;</code> once for all component instances.</p>
+by providing a <code>styles</code> function which is invoked injecting CSS into the <code>&lt;head&gt;</code> once for all component instances.</p>
 <pre><code class="language-js">import { createComponent, withStyles } from 'https://unpkg.com/ficusjs?module'
 
 // import the renderer and html tagged template literal from the lit-html library
@@ -235,6 +235,48 @@ createComponent(
     }
   })
 )
+</code></pre>
+<p>The <code>withStyles</code> function automatically handles loading styles based on the component lifecycle hooks.</p>
+<h3><code>styles</code> function</h3>
+<p>The <code>styles</code> function must be provided when using the <code>withStyles</code> function. This function is invoked and injects CSS into the <code>&lt;head&gt;</code>
+once for all component instances.</p>
+<p>The <code>styles</code> function can return a <code>String</code> or Array of strings containing either styles or URL to an external stylesheet.</p>
+<h4>String styles</h4>
+<p>Return a string containing styles.</p>
+<pre><code class="language-js">{
+  styles () {
+    return `
+      my-component button {
+        background-color: yellow;
+        color: black;
+      }
+    `
+  }
+}
+</code></pre>
+<h4>External stylesheet</h4>
+<p>Return a URL to a stylesheet - must be a fully qualified URL, not a relative path.</p>
+<pre><code class="language-js">{
+  styles () {
+    return 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'
+  }
+}
+</code></pre>
+<h4>Mixed</h4>
+<p>Return an Array containing both URL and string styles.</p>
+<pre><code class="language-js">{
+  styles () {
+    return [
+      'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
+      `
+        my-component button {
+          background-color: yellow;
+          color: black;
+        }
+      `
+    ]
+  }
+}
 </code></pre>
 
     </article>
