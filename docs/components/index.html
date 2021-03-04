@@ -83,10 +83,10 @@ Component names require a dash to be used in them; they <strong>cannot</strong> 
 <p>Import the <code>createComponent</code> function together with a renderer function and <code>html</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates">template literal tag</a> into your Javascript file:</p>
 <p><strong>my-component.js</strong></p>
 <pre><code class="language-js">// import the createComponent function
-import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+import { createComponent } from 'https://cdn.skypack.dev/ficusjs/component'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent('my-component', {
   renderer,
@@ -348,10 +348,10 @@ This also allows you to use prop values as initial state.</p>
 </code></pre>
 <p>Example component using <code>setState</code> method</p>
 <pre><code class="language-js">// import the createComponent function
-import { createComponent } from 'https://unpkg.com/ficusjs@latest/dist/component.js'
+import { createComponent } from 'https://cdn.skypack.dev/ficusjs/component'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent('set-state-example', {
   renderer,

@@ -81,15 +81,15 @@
 This allows any tagged template literal renderer to be plugged into a component.</p>
 <p>The following renderers are available as minified bundles.</p>
 <ul>
+<li><a href="https://www.npmjs.com/package/uhtml">uhtml</a> (default)</li>
 <li><a href="https://www.npmjs.com/package/lit-html">lit-html</a></li>
-<li><a href="https://www.npmjs.com/package/uhtml">uhtml</a></li>
 <li><a href="https://www.npmjs.com/package/htm">htm and Preact</a></li>
 <li><code>document.createElement</code></li>
 </ul>
-<h2><code>lit-html</code></h2>
-<p>The <a href="https://www.npmjs.com/package/lit-html">lit-html</a> renderer is available in this package.</p>
+<h2><code>uhtml</code></h2>
+<p>The <a href="https://www.npmjs.com/package/uhtml">uhtml</a> renderer is available in this package and is the default renderer.</p>
 <pre><code class="language-js">// import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/uhtml'
 
 createComponent('test-comp', {
   renderer,
@@ -100,10 +100,10 @@ createComponent('test-comp', {
   }
 })
 </code></pre>
-<h2><code>uhtml</code></h2>
-<p>The <a href="https://www.npmjs.com/package/uhtml">uhtml</a> renderer is available in this package.</p>
+<h2><code>lit-html</code></h2>
+<p>The <a href="https://www.npmjs.com/package/lit-html">lit-html</a> renderer is available in this package.</p>
 <pre><code class="language-js">// import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/uhtml.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 createComponent('test-comp', {
   renderer,
@@ -117,7 +117,7 @@ createComponent('test-comp', {
 <h2><code>htm</code> and <code>Preact</code></h2>
 <p>The <a href="https://www.npmjs.com/package/htm">htm and Preact</a> renderer is available in this package.</p>
 <pre><code class="language-js">// import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/htm.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/htm'
 
 createComponent('test-comp', {
   renderer,
@@ -132,7 +132,7 @@ createComponent('test-comp', {
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"><code>document.createElement</code></a> renderer is available in this package.
 In your component, return a template literal string containing HTML.</p>
 <p>This is only the <code>renderer</code> function and <strong>does not use</strong> a tagged template literal for rendering.</p>
-<pre><code class="language-js">import { renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/create-element.js'
+<pre><code class="language-js">import { renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/create-element'
 
 createComponent('test-comp', {
   renderer,

@@ -80,7 +80,7 @@
 <h2>Example</h2>
 <p>Import the <code>createEventBus</code> function into your Javascript main file:</p>
 <p><strong>main.js</strong></p>
-<pre><code class="language-js">import { createEventBus } from 'https://unpkg.com/ficusjs?module'
+<pre><code class="language-js">import { createEventBus } from 'https://cdn.skypack.dev/ficusjs'
 </code></pre>
 <p>Create a new event bus instance:</p>
 <p><strong>main.js</strong></p>
@@ -88,7 +88,7 @@
 </code></pre>
 <h2><code>createEventBus</code> function</h2>
 <p>Once you have created your events instance using <code>createEventBus</code>, simply pass it to each component:</p>
-<pre><code class="language-js">import { createComponent, withEventBus } from 'https://unpkg.com/ficusjs?module'
+<pre><code class="language-js">import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
 
 // A new component
 createComponent(
@@ -102,7 +102,7 @@ createComponent(
 <p>The <code>getEventBus</code> function is a quick way to retrieve the events instance.
 If the event bus has not yet been created, <code>getEventBus</code> will create a new instance automatically.</p>
 <pre><code class="language-js">// import the function
-import { createComponent, getEventBus, withEventBus } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, getEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
 
 // use it within a component
 createComponent(
@@ -132,8 +132,8 @@ unsubscribe()
 You need to provide the initial topic subscription (use the <code>created</code> or <code>mounted</code> lifecycle hook) and then once established, subscriptions
 will be handled automatically when the component fires the <code>removed</code> or <code>updated</code> lifecycle hook.</p>
 <p>See <a href="/docs/composition">extending components</a> for more on the <code>withEventBus</code> function.</p>
-<pre><code class="language-js">import { createComponent, createEventBus, withEventBus } from 'https://unpkg.com/ficusjs?module'
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+<pre><code class="language-js">import { createComponent, createEventBus, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 const eventBus = createEventBus()
 

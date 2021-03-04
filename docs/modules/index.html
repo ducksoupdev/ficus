@@ -82,10 +82,10 @@ How can you write a component once and use it in multiple applications?</p>
 <h2>Consuming a module</h2>
 <p>The following example shows how to consume a module from a shared library.</p>
 <pre><code class="language-js">// import the required FicusJS functions
-import { createComponent, use } from 'https://unpkg.com/ficusjs?module'
+import { createComponent, use } from 'https://cdn.skypack.dev/ficusjs'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 // import component library from a local path
 import { module } from './path/to/component-module.esm.js'
@@ -106,10 +106,10 @@ createComponent('my-component', {
 <h3><code>use</code> function</h3>
 <p>The <code>use</code> function will import a module of components into your application ready to use.</p>
 <pre><code class="language-js">// import the use function
-import { use } from 'https://unpkg.com/ficusjs?module'
+import { use } from 'https://cdn.skypack.dev/ficusjs'
 
 // import the renderer and html tagged template literal from the lit-html library
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 // import component module from a local path
 import { module } from './path/to/component-module.esm.js'

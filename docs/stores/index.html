@@ -79,7 +79,7 @@
 <h2>Example</h2>
 <p>Import the <code>createStore</code> function into your Javascript main file:</p>
 <p><strong>main.js</strong></p>
-<pre><code class="language-js">import { createStore } from 'https://unpkg.com/ficusjs?module'
+<pre><code class="language-js">import { createStore } from 'https://cdn.skypack.dev/ficusjs'
 </code></pre>
 <p>Create a new store instance with <code>actions</code>, <code>mutations</code> and <code>initialState</code>:</p>
 <p><strong>main.js</strong></p>
@@ -162,7 +162,7 @@
 <h2><code>getStore</code> function</h2>
 <p>The <code>getStore</code> function is a quick way to retrieve a store.</p>
 <pre><code class="language-js">// import the function
-import { getStore } from 'https://unpkg.com/ficusjs?module'
+import { getStore } from 'https://cdn.skypack.dev/ficusjs'
 
 // retrieve a store instance
 const storeInstance = getStore('my.another.store')
@@ -427,7 +427,7 @@ const store = createStore('an.example.store', {
 </code></pre>
 <h3><code>createPersist</code> function</h3>
 <p>You can optionally save state to <code>window.localStorage</code> (for persistence across browser sessions) using the <code>createPersist</code> function:</p>
-<pre><code class="language-js">import { createStore, createPersist } from 'https://unpkg.com/ficusjs?module'
+<pre><code class="language-js">import { createStore, createPersist } from 'https://cdn.skypack.dev/ficusjs'
 
 // An initialised store. Params omitted for brevity
 const store = createStore('an.example.store', {
@@ -485,7 +485,7 @@ const store = createStore('an.example.store', {
 </tr>
 </tbody>
 </table>
-<pre><code class="language-js">import { createStore } from 'https://unpkg.com/ficusjs?module'
+<pre><code class="language-js">import { createStore } from 'https://cdn.skypack.dev/ficusjs'
 
 class MyCustomPersist {
   setState (state) {
@@ -514,8 +514,8 @@ const store = createStore('an.example.store', {
 <p>Once you have created your store instance, the <code>withStore</code> function extends a component and makes working with stores easier in component rendering, computed getters and methods.
 Subscription to store changes will be handled automatically within the component.</p>
 <p>See <a href="/docs/composition">extending components</a> for more on the <code>withStore</code> function.</p>
-<pre><code class="language-js">import { createComponent, withStore } from 'https://unpkg.com/ficusjs?module'
-import { html, renderer } from 'https://unpkg.com/ficusjs-renderers@latest/dist/lit-html.js'
+<pre><code class="language-js">import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs'
+import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
 
 // An initialised store. Params omitted for brevity
 const store = createStore('an.example.store', {
