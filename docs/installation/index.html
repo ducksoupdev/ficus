@@ -44,7 +44,7 @@
     <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
     <ul class="menu">
       <li class="menu__item toggle"><span></span></li>
-      <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
+      <li class="menu__item"><a href="https://github.com/ficusjs/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
       <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
     </ul>
   </div>
@@ -89,19 +89,37 @@
 <h2>Available builds</h2>
 <p>FicusJS only provides ES module builds. For legacy browsers or alternative modules such as CommonJS, it is recommended to use a build tool to transpile the code.</p>
 <p>The following builds are available.</p>
-<ul>
-<li>All (component, event bus and store) <code>dist/index.js</code></li>
-<li><a href="docs/components">Components</a> <code>dist/component.js</code>
-<ul>
-<li><a href="docs/composition">With store</a> <code>dist/with-store.js</code></li>
-<li><a href="docs/composition">With event bus</a> <code>dist/with-event-bus.js</code></li>
-<li><a href="docs/composition">With state transactions</a> <code>dist/with-state-transactions.js</code></li>
-<li><a href="docs/composition">With styles</a> <code>dist/with-styles.js</code></li>
-</ul>
-</li>
-<li><a href="docs/event-bus">Event bus</a> <code>dist/event.js</code></li>
-<li><a href="docs/stores">Stores</a> <code>dist/store.js</code></li>
-</ul>
+<h3>All features (<a href="docs/components">component</a>, <a href="docs/event-bus">event bus</a>, <a href="docs/stores">store</a> and <a href="docs/composition">component composition functions</a>)</h3>
+<pre><code class="language-js">import {
+  // components
+  createComponent,
+  withStateTransactions,
+  withStore,
+  withEventBus,
+  withStyles,
+
+  // event bus
+  createEventBus,
+  getEventBus,
+
+  // stores
+  createPersist,
+  createStore,
+  getStore,
+
+  // modules
+  use
+} from 'https://cdn.skypack.dev/ficusjs'
+</code></pre>
+<h3><a href="docs/components">Components</a></h3>
+<pre><code class="language-js">import { createComponent, use } from 'https://cdn.skypack.dev/ficusjs/component'
+</code></pre>
+<h3><a href="docs/event-bus">Event bus</a></h3>
+<pre><code class="language-js">import { createEventBus, getEventBus } from 'https://cdn.skypack.dev/ficusjs/event'
+</code></pre>
+<h3><a href="docs/stores">Stores</a></h3>
+<pre><code class="language-js">import { createPersist, createStore, getStore } from 'https://cdn.skypack.dev/ficusjs/store'
+</code></pre>
 
     </article>
   </div>

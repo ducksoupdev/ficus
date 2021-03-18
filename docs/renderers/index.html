@@ -44,7 +44,7 @@
     <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
     <ul class="menu">
       <li class="menu__item toggle"><span></span></li>
-      <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
+      <li class="menu__item"><a href="https://github.com/ficusjs/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
       <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
     </ul>
   </div>
@@ -83,7 +83,8 @@ This allows any tagged template literal renderer to be plugged into a component.
 <ul>
 <li><a href="https://www.npmjs.com/package/uhtml">uhtml</a> (default)</li>
 <li><a href="https://www.npmjs.com/package/lit-html">lit-html</a></li>
-<li><a href="https://www.npmjs.com/package/htm">htm and Preact</a></li>
+<li><a href="https://www.npmjs.com/package/htm">htm</a></li>
+<li><a href="https://www.npmjs.com/package/htm">htm</a> with <a href="https://www.npmjs.com/package/preact">Preact</a></li>
 <li><code>document.createElement</code></li>
 </ul>
 <h2><code>uhtml</code></h2>
@@ -114,10 +115,22 @@ createComponent('test-comp', {
   }
 })
 </code></pre>
-<h2><code>htm</code> and <code>Preact</code></h2>
-<p>The <a href="https://www.npmjs.com/package/htm">htm and Preact</a> renderer is available in this package.</p>
-<pre><code class="language-js">// import the renderer function and the html tagged template literal
-import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/htm'
+<h2><code>htm</code></h2>
+<p>The <a href="https://www.npmjs.com/package/htm">htm</a> renderer is a JSX-like renderer available in this package.</p>
+<pre><code class="language-js">import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/htm'
+
+createComponent('test-comp', {
+  renderer,
+  render () {
+    return html`
+      &lt;div&gt;Some HTML content with ${someVariable}&lt;/div&gt;
+    `
+  }
+})
+</code></pre>
+<h2><code>htm</code> with <code>Preact</code></h2>
+<p>The <a href="https://www.npmjs.com/package/htm">htm</a> with <a href="https://www.npmjs.com/package/preact">Preact</a> renderer is available in this package.</p>
+<pre><code class="language-js">import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/htm-preact'
 
 createComponent('test-comp', {
   renderer,

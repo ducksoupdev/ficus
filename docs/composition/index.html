@@ -44,7 +44,7 @@
     <div class="logo">FicusJS <span class="logo__thin">Doc</span></div>
     <ul class="menu">
       <li class="menu__item toggle"><span></span></li>
-      <li class="menu__item"><a href="https://github.com/ducksoupdev/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
+      <li class="menu__item"><a href="https://github.com/ficusjs/ficusjs" target="_blank" rel="noopener noreferrer" class="link link--dark"><svg class="icon"><use xlink:href="#icon_github" /></svg> Github</a></li>
       <li class="menu__item"><a href="index.html" class="link link--dark"><svg class="icon"><use xlink:href="#icon_home" /></svg> Home</a></li>
     </ul>
   </div>
@@ -78,7 +78,11 @@
 <p>You can also write your own functions.</p>
 <h2><code>withStore</code> function</h2>
 <p>The <code>withStore</code> function extends a component and makes working with stores easier in component rendering, computed getters and methods.</p>
-<pre><code class="language-js">import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs'
+<pre><code class="language-js">// import it with all other features
+import { createComponent, withStore } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withStore } from 'https://cdn.skypack.dev/ficusjs/with-store'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
@@ -121,7 +125,11 @@ The method accepts a <code>store</code> argument which can be a single store ins
 </code></pre>
 <h2><code>withEventBus</code> function</h2>
 <p>The <code>withEventBus</code> function extends a component and makes working with an event bus easier in component methods.</p>
-<pre><code class="language-js">import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
+<pre><code class="language-js">// import it with all other features
+import { createComponent, withEventBus } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withEventBus } from 'https://cdn.skypack.dev/ficusjs/with-event-bus'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
@@ -156,7 +164,11 @@ The method accepts an <code>eventBus</code> argument which is a single event ins
 </code></pre>
 <h2><code>withStateTransactions</code> function</h2>
 <p>The <code>withStateTransactions</code> function extends a component with transactions so multiple state changes can occur without triggering a re-render.</p>
-<pre><code class="language-js">import { createComponent, withStateTransactions } from 'https://cdn.skypack.dev/ficusjs'
+<pre><code class="language-js">// import it with all other features
+import { createComponent, withStateTransactions } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withStateTransactions } from 'https://cdn.skypack.dev/ficusjs/with-state-transactions'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
@@ -213,7 +225,11 @@ This is used if an error occurs, and the state needs to be reset.</p>
 <h2><code>withStyles</code> function</h2>
 <p>The <code>withStyles</code> function extends a component and makes working with component styles more efficient
 by providing a <code>styles</code> function which is invoked injecting CSS into the <code>&lt;head&gt;</code> once for all component instances.</p>
-<pre><code class="language-js">import { createComponent, withStyles } from 'https://cdn.skypack.dev/ficusjs'
+<pre><code class="language-js">// import it with all other features
+import { createComponent, withStyles } from 'https://cdn.skypack.dev/ficusjs'
+
+// alternatively, import the function directly
+// import { withStyles } from 'https://cdn.skypack.dev/ficusjs/with-styles'
 
 // import the renderer and html tagged template literal from the lit-html library
 import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers/lit-html'
