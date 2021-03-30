@@ -114,7 +114,7 @@ function checkBackToTop () {
   scrolling = false
 }
 
-['https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap'].forEach(function (f) {
+['https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap'].forEach(function (f) {
   const gf = document.createElement('link')
   gf.rel = 'stylesheet'
   gf.href = f

@@ -1,0 +1,21 @@
+{
+  "name": "FicusJS",
+  "short_name": "FicusJS",
+  "icons": [
+    {
+      "src": "img/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "scope": "/",
+  "theme_color": "#509353"
+}
